@@ -1,0 +1,14 @@
+[user]
+    email = jtedros@iram.es
+    name = Jean Tedros
+
+[init]
+    defaultBranch = master
+
+[core]
+    excludesFile = ~/.gitignore
+
+[alias]
+    st = status
+    br = branch
+    cm = commit
