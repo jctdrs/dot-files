@@ -114,7 +114,6 @@ umask 0022
 source "${HOME}/.pretty_bash.sh"
 source "${HOME}/.jcal.sh"
 source "${HOME}/.jnote.sh"
-source "${HOME}/.config/dots/bash/restic_utils.sh"
 
 PS1=""
 PS1=$PS1"\["$black"\]┌─ "
