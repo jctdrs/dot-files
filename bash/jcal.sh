@@ -31,29 +31,30 @@ jcal(){
     else
         R=$(sed -n "s/\/$MONTH\b//p" "${HOME}/.dates-${START_YEAR}" | awk '
         {a[++n]=$1; b[++n]=$2}
-        END{var= "\\b|";
+        END{var= "\\b";
         for (i=1; i<=n; i++)
         if (b[i]=="") var=var a[i-1] "\\b|";
         print var}')
         
         G=$(sed -n "s/\/$MONTH\b//p" "${HOME}/.dates-${START_YEAR}" | awk '
         {a[++n]=$1; b[++n]=$2}
-        END{var= "\\b|";
+        END{var= "\\b";
         for (i=1; i<=n; i++)
-        if (b[i]!="") var=var a[i-1] "\\b[^;]|";
+        if (b[i]!="") var= var a[i-1] "\\b[^;]|\\b";
         print var}')
         
+
         if [[ "${MONTH}" == "${START_MONTH}" ]]; then
             if [[ "${MONTH}" == "${CURRENT_MONTH}" ]]; then
                 ncal "${START_YEAR}" -m "${MONTH}" -M > "${HOME}/.${MONTH}"
                 eval today
                 GREP_COLORS='ms=2;91' grep -E -w --color=always "${R}" "${HOME}/.${MONTH}" > "${HOME}/.tmp"
-                GREP_COLORS='ms=2;92' grep -E -w --color=always "${G}" "${HOME}/.tmp" > "${HOME}/.tmp.tmp"
+                GREP_COLORS='ms=2;92' grep -E --color=always "${G}" "${HOME}/.tmp" > "${HOME}/.tmp.tmp"
                 mv "${HOME}/.tmp.tmp" "${HOME}/.${MONTH}"
             else
                 ncal "${START_YEAR}" -m "${MONTH}" -M | GREP_COLORS='ms=2;91' grep -E -w --color=always "${R}" \
                 > "${HOME}/.tmp"
-                GREP_COLORS='ms=2;92' grep -E -w --color=always "${G}" "${HOME}/.tmp" > "${HOME}/.tmp.tmp"
+                GREP_COLORS='ms=2;92' grep -E  --color=always "${G}" "${HOME}/.tmp" > "${HOME}/.tmp.tmp"
                 mv "${HOME}/.tmp.tmp" "${HOME}/.${MONTH}"
             fi
         else
@@ -61,12 +62,12 @@ jcal(){
                 ncal "${START_YEAR}" -m "${MONTH}" -M | cut -d" " -f3- | sed '1 s/^[  \t]*//' > "${HOME}/.${MONTH}"
                 eval today
                 GREP_COLORS='ms=2;91' grep -E -w --color=always "${R}" "${HOME}/.${MONTH}" > "${HOME}/.tmp.tmp"
-                GREP_COLORS='ms=2;92' grep -E -w --color=always "${G}" "${HOME}/.tmp.tmp" > "${HOME}/.tmp"
+                GREP_COLORS='ms=2;92' grep -E --color=always "${G}" "${HOME}/.tmp.tmp" > "${HOME}/.tmp"
                 mv "${HOME}/.tmp.tmp" "${HOME}/.${MONTH}"
             else
                 ncal "${START_YEAR}" -m "${MONTH}" -M | cut -d" " -f3- | sed '1 s/^[  \t]*//' | \
                 GREP_COLORS='ms=2;91' grep -E -w --color=always "${R}" > "${HOME}/.tmp"
-                GREP_COLORS='ms=2;92' grep -E -w --color=always "${G}" "${HOME}/.tmp" > "${HOME}/.tmp.tmp"
+                GREP_COLORS='ms=2;92' grep -E --color=always "${G}" "${HOME}/.tmp" > "${HOME}/.tmp.tmp"
                 mv "${HOME}/.tmp.tmp" "${HOME}/.${MONTH}"
             fi
         fi
