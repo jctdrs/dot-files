@@ -119,9 +119,9 @@ today(){
     if [[ $(date +%-u) -gt 5 ]]; then
         sed -i "s,\b$CURRENT_DAY\b,\x1b[47m&\x1b[49m\x1b[2m\x1b[94m," "${HOME}/.${CURRENT_MONTH}"
     else
-        if echo "$R" | grep -q "\b${CURRENT_DAY}\b"; then
+        if echo "$R" | grep -q "${CURRENT_DAY}"; then
             sed -i "s,\b$CURRENT_DAY\b,\x1b[47m\x1b[2m\x1b[31m&\x1b[0m," "${HOME}/.${CURRENT_MONTH}"
-        elif echo "$G" | grep -q "\b${CURRENT_DAY}\b"; then
+        elif echo "$G" | grep -q "${CURRENT_DAY}"; then
             sed -i "s,\b$CURRENT_DAY\b,\x1b[47m\x1b[2m\x1b[32m&\x1b[0m," "${HOME}/.${CURRENT_MONTH}"
         else
             sed -i "s,\b$CURRENT_DAY\b,\x1b[47m&\x1b[0m," "${HOME}/.${CURRENT_MONTH}"
