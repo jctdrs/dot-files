@@ -8,7 +8,6 @@ alias clear='clear && dis'
 # shortcuts to directories
 alias cds='cd $HOME/Repo/'
 alias cdd='cd $HOME/.config/dots/'
-alias cdb='cd $HOME/Repo/bluepill/'
 alias cdw='cd $HOME/Repo/jctdrs.github.io/'
 
 # shortcuts to programs
