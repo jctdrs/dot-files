@@ -159,7 +159,7 @@ agenda(){
 
     for (( MONTH=START_MONTH; MONTH<(START_MONTH+2); MONTH++ ));
     do
-        if [[ "${MONTH}" == "${START_MONTH}" ]]; then
+        if [[ "${MONTH}" == "${CURRENT_MONTH}" ]]; then
             if [[ "${CURRENT_DAY}" -lt 9 ]]; then
                 grep -E "[$((first+1))-9]\/${MONTH} .|1[0-9]\/${MONTH} .|2[0-9]\/${MONTH} .|3[0-1]\/${MONTH} ." \
                 "${HOME}/.dates-${START_YEAR}" --color=no
