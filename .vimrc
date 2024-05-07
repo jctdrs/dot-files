@@ -7,9 +7,6 @@ map <leader>te :tabedit <C-r>=escape(expand("%:p:h"), " ")<cr>/
 au BufNewFile,BufRead *
     \	set expandtab         |
     \	set autoindent        |
-    \	set tabstop=4	      |
-    \	set softtabstop=4     |
-    \	set shiftwidth=4      |
     \   set number            |
     \   set ruler             |
     \   set termguicolors     |
@@ -22,6 +19,9 @@ au BufNewFile,BufRead *
     \   set nowb              |
     \   set nobackup          |
     \   syntax enable
+
+au BufNewFile,BufRead *.txt
+    \   set textwidth=79
 
 set autoread
 au FocusGained,BufEnter * checktime

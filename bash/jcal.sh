@@ -30,18 +30,18 @@ jcal(){
         true
     else
         R=$(sed -n "s/\/$MONTH\b//p" "${HOME}/.dates-${START_YEAR}" | awk '
-        {a[++n]=$1; b[++n]=$2}
-        END{var= "\\b";
-        for (i=1; i<=n; i++)
-        if (b[i]=="") var=var a[i-1] "\\b|";
-        print var}')
+            {a[++n]=$1; b[++n]=$2}
+            END{var= "\\b";
+            for (i=1; i<=n; i++)
+            if (b[i]=="") var=var a[i-1] "\\b|";
+            print var}')
         
         G=$(sed -n "s/\/$MONTH\b//p" "${HOME}/.dates-${START_YEAR}" | awk '
-        {a[++n]=$1; b[++n]=$2}
-        END{var= "\\b";
-        for (i=1; i<=n; i++)
-        if (b[i]!="") var= var a[i-1] "\\b[^;]|\\b";
-        print var}')
+            {a[++n]=$1; b[++n]=$2}
+            END{var= "\\b";
+            for (i=1; i<=n; i++)
+            if (b[i]!="") var= var a[i-1] "\\b[^;]|\\b";
+            print var}')
         
 
         if [[ "${MONTH}" == "${START_MONTH}" ]]; then
@@ -149,7 +149,6 @@ agenda(){
     echo -e "${underline}"Agenda:"${reset}" 
     first="${CURRENT_DAY:0:1}"
     second="${CURRENT_DAY:1:1}"
-    
     
     if grep -Eq "^${CURRENT_DAY}\/${CURRENT_MONTH} ." "${HOME}/.dates-${START_YEAR}" --color=no; then
         echo "Today": 

@@ -148,7 +148,9 @@ dis () {
 	echo
 }
 export -f dis
-dis 
+eval dis 
+eval jcal
 
 # Created by `pipx` on 2023-07-07 10:05:40
 export PATH="$PATH:/home/jtedros/.local/bin"
+export PATH="$PATH:/home/jtedros/.local/bin/fv5.5.2"
