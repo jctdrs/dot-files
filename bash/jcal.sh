@@ -46,26 +46,26 @@ jcal(){
 
         if [[ "${MONTH}" == "${START_MONTH}" ]]; then
             if [[ "${MONTH}" == "${CURRENT_MONTH}" ]]; then
-                ncal "${START_YEAR}" -m "${MONTH}" -M > "${HOME}/.${MONTH}"
+                cal "${MONTH}" "${START_YEAR}" -vm1> "${HOME}/.${MONTH}"
                 eval today
                 GREP_COLORS='ms=2;91' grep -E -w --color=always "${R}" "${HOME}/.${MONTH}" > "${HOME}/.tmp"
                 GREP_COLORS='ms=2;92' grep -E --color=always "${G}" "${HOME}/.tmp" > "${HOME}/.tmp.tmp"
                 mv "${HOME}/.tmp.tmp" "${HOME}/.${MONTH}"
             else
-                ncal "${START_YEAR}" -m "${MONTH}" -M | GREP_COLORS='ms=2;91' grep -E -w --color=always "${R}" \
+                cal "${MONTH}" "${START_YEAR}" -vm1| GREP_COLORS='ms=2;91' grep -E -w --color=always "${R}" \
                 > "${HOME}/.tmp"
                 GREP_COLORS='ms=2;92' grep -E  --color=always "${G}" "${HOME}/.tmp" > "${HOME}/.tmp.tmp"
                 mv "${HOME}/.tmp.tmp" "${HOME}/.${MONTH}"
             fi
         else
             if [[ "${MONTH}" == "${CURRENT_MONTH}" ]]; then
-                ncal "${START_YEAR}" -m "${MONTH}" -M | cut -d" " -f3- | sed '1 s/^[  \t]*//' > "${HOME}/.${MONTH}"
+                cal "${MONTH}" "${START_YEAR}" -vm1| cut -d" " -f3- | sed '1 s/^[  \t]*//' > "${HOME}/.${MONTH}"
                 eval today
                 GREP_COLORS='ms=2;91' grep -E -w --color=always "${R}" "${HOME}/.${MONTH}" > "${HOME}/.tmp.tmp"
                 GREP_COLORS='ms=2;92' grep -E --color=always "${G}" "${HOME}/.tmp.tmp" > "${HOME}/.tmp"
                 mv "${HOME}/.tmp.tmp" "${HOME}/.${MONTH}"
             else
-                ncal "${START_YEAR}" -m "${MONTH}" -M | cut -d" " -f3- | sed '1 s/^[  \t]*//' | \
+                cal "${MONTH}" "${START_YEAR}" -vm1| cut -d" " -f3- | sed '1 s/^[  \t]*//' | \
                 GREP_COLORS='ms=2;91' grep -E -w --color=always "${R}" > "${HOME}/.tmp"
                 GREP_COLORS='ms=2;92' grep -E --color=always "${G}" "${HOME}/.tmp" > "${HOME}/.tmp.tmp"
                 mv "${HOME}/.tmp.tmp" "${HOME}/.${MONTH}"
@@ -150,29 +150,29 @@ agenda(){
     first="${CURRENT_DAY:0:1}"
     second="${CURRENT_DAY:1:1}"
     
-    if grep -Eq "^${CURRENT_DAY}\/${CURRENT_MONTH} ." "${HOME}/.dates-${START_YEAR}" --color=no; then
+    if grep -Eq "^${CURRENT_DAY}/${CURRENT_MONTH} ." "${HOME}/.dates-${START_YEAR}" --color=no; then
         echo "Today": 
-        grep -E "^${CURRENT_DAY}\/${CURRENT_MONTH} ." "${HOME}/.dates-${START_YEAR}" --color=no
+        grep -E "^${CURRENT_DAY}/${CURRENT_MONTH} ." "${HOME}/.dates-${START_YEAR}" --color=no
         echo ""
     fi
-
+    
     for (( MONTH=START_MONTH; MONTH<(START_MONTH+2); MONTH++ ));
     do
         if [[ "${MONTH}" == "${CURRENT_MONTH}" ]]; then
             if [[ "${CURRENT_DAY}" -lt 9 ]]; then
-                grep -E "[$((first+1))-9]\/${MONTH} .|1[0-9]\/${MONTH} .|2[0-9]\/${MONTH} .|3[0-1]\/${MONTH} ." \
+                grep -E "[$((first+1))-9]/${MONTH} .|1[0-9]/${MONTH} .|2[0-9]/${MONTH} .|3[0-1]/${MONTH} ." \
                 "${HOME}/.dates-${START_YEAR}" --color=no
             elif [[ "${CURRENT_DAY}" -lt 19 ]]; then
-                grep -E "1[$((second+1))-9]\/${MONTH} .|2[0-9]\/${MONTH} .|3[0-1]\/${MONTH} ." \
+                grep -E "1[$((second+1))-9]/${MONTH} .|2[0-9]/${MONTH} .|3[0-1]/${MONTH} ." \
                 "${HOME}/.dates-${START_YEAR}" --color=no
             elif [[ "${CURRENT_DAY}" -lt 29 ]]; then
-                grep -E "2[$((second+1))-9]\/${MONTH} .|3[0-1]\/${MONTH} ." \
+                grep -E "2[$((second+1))-9]/${MONTH} .|3[0-1]/${MONTH} ." \
                 "${HOME}/.dates-${START_YEAR}" --color=no
             elif [[ "${CURRENT_DAY}" -lt 32 ]]; then
-                grep -E "3[$((second+1))]\/${MONTH} ." "${HOME}/.dates-${START_YEAR}" --color=no
+                grep -E "3[$((second+1))]/${MONTH} ." "${HOME}/.dates-${START_YEAR}" --color=no
             fi
         else
-            grep -E "[1-9]\/${MONTH} .|1[0-9]\/${MONTH} .|2[0-9]\/${MONTH} .|3[0-1]\/${MONTH} ." \
+            grep -E "[1-9]/${MONTH} .|1[0-9]/${MONTH} .|2[0-9]/${MONTH} .|3[0-1]/${MONTH} ." \
             "${HOME}/.dates-${START_YEAR}" --color=no
         fi
     done
