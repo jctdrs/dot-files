@@ -111,7 +111,6 @@ shopt -s checkwinsize
 umask 0022
 
 # init
-source "${HOME}/.pretty_bash.sh"
 source "${HOME}/.jcal.sh"
 source "${HOME}/.jnote.sh"
 
