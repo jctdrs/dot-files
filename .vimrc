@@ -4,7 +4,7 @@ nnoremap <A-Left> :tabprevious<CR>
 nnoremap <A-Right> :tabnext<CR>
 map <leader>te :tabedit <C-r>=escape(expand("%:p:h"), " ")<cr>/
 
-au BufNewFile,BufRead *
+au BufNewFile,BufRead *.*
     \	set expandtab         |
     \	set autoindent        |
     \   set number            |
