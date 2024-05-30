@@ -1,5 +1,6 @@
 #!/usr/bin/bash
 
+ll(){
 # Argument
 if [ -z "$*" ]; then 
   dirarg=.
@@ -24,3 +25,4 @@ KW="-loh"
                 sub($3,sprintf(SIZES[COUNTLS]),$3)
                 printf("%2s  %6s  %4s  %2s  %-3s  %-5s   %s\n", 
                        $1, $2, $3, $5, $4, $6, $7) } }' 
+}
